@@ -1,0 +1,49 @@
+{% extends 'MyBlogBundle::layout.html.twig' %}
+
+ {% block content %}
+     <div class="mainbar">
+        <div class="article">
+          <h2><span>Contact</span></h2>
+          <div class="clr"></div>
+          <p>Nullapede laorem velit curabitudin enim in nibh ero leo in pede. Semperpurus nibh elit et convallis eu trices congue males monterdum elit.</p>
+        </div>
+        <div class="article">
+          <h2><span>Send us</span> mail</h2>
+          <div class="clr"></div>
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="flash-notice">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+          {{ form_start(form,{'attr':{'id':'sendemail'}}) }}
+         
+            <ol>
+              <li>
+                {{ form_label(form.name,'Ім\'я') }}
+                {{ form_errors(form.name) }}
+                {{ form_widget(form.name, {'attr': {'class': 'text','id':'name'}}) }}
+               
+              </li>
+              <li>
+                {{ form_label(form.email,'Пошта') }}
+                {{ form_errors(form.email) }}
+                {{ form_widget(form.email, {'attr': {'class': 'text','id':'email'}}) }}
+              </li>
+              <li>
+                {{ form_label(form.message,'Ваше повідомлення') }}
+                {{ form_errors(form.message) }}
+                {{ form_widget(form.message, {'attr': {'id':'message','rows':8,'cols':50}}) }}
+              </li>
+              <li> 
+               
+                   {{ form_widget(form.save, {'class':'send','id':'imageField','label':'Надіслати'}) }}
+                <div class="clr"></div>
+              </li>
+            </ol>
+          {{ form_end(form) }}
+        </div>
+      </div> 
+     
+     
+     
+     {% endblock%}

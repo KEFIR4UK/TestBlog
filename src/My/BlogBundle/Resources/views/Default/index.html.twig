@@ -1,0 +1,24 @@
+{% extends 'MyBlogBundle::layout.html.twig' %}
+
+     {% block content %}
+          <div class="mainbar">
+        {% for blog in blogs %}
+                      <div class="article">
+                        <h2>{{blog.0.title}}</h2>
+                        <p class="infopost">Posted <span class="date">{{blog.0.datecreate|date('Y-m-d')}}</span> by <a href="#">{{blog.0.author}}</a> &nbsp;&nbsp;|&nbsp;&nbsp; Filed under <a href="#">{{blog.0.tag}}</a> &nbsp;&nbsp; <a href="#" class="com">Comments <span>{{blog.1}}</span></a></p>
+                        <div class="clr"></div>
+                        <div class="img"><img src="{{asset(['images/Blog/'~blog.0.img]|join)}}" width="198" height="188" alt="" class="fl" /></div>
+                        <div class="post_content">
+                         {{blog.0.text(50)}}
+                          <p class="spec"><a href="{{path('my_blog_show',{'id':blog.0.id})}}" class="rm">&raquo; Read more</a></p>
+                        </div>
+                        <div class="clr"></div>
+                      </div>
+        {% else %}
+    Немає матеріалу для відображення  
+        {% endfor %}
+           {{ knp_pagination_render(blogs) }}
+  
+                    </div>
+       {% endblock %}
+  

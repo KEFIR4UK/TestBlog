@@ -1,0 +1,31 @@
+{% extends "MyBlogBundle::layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block content %}
+
+    <div class="mainbar">
+        <div class="article">
+            <h2><span>Reset password</span></h2>
+            <div class="clr"></div>
+            <p>Here you may reset your password</p>
+        </div>
+        <div class="article">
+            <h2><span>Reset </span>password</h2>
+            <div class="clr"></div>
+            <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+                <ol>
+                    <li>
+                        {% if invalid_username is defined %}
+                            <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+                        {% endif %}
+                        <label for="username">{{ 'resetting.request.username'|trans }}</label>
+                        <input type="text" class="text" name="username" required="required" />
+                    </li>
+                    <li>
+                        <input type="submit" value="{{ 'resetting.request.submit'|trans }}" class="send" />
+                    </li>
+                </ol>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

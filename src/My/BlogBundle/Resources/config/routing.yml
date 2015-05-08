@@ -1,0 +1,16 @@
+my_blog_homepage:
+    path:     /
+    defaults: { _controller: MyBlogBundle:Default:index  }
+my_blog_contact:
+    path:     /contact
+    defaults: { _controller: MyBlogBundle:Contact:index }
+my_blog_show:
+    path:     /show/{id}
+    defaults: { _controller: MyBlogBundle:Default:show }
+my_blog_about:
+    path:     /about
+    defaults: { _controller: MyBlogBundle:Default:about }
+my_blog_tags:
+    path:     /tags/{tag}
+    defaults: { _controller: MyBlogBundle:Default:showtags }
+

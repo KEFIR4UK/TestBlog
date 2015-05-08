@@ -1,0 +1,63 @@
+{%extends 'MyBlogBundle::layout.html.twig'%}
+
+
+{% block content %}
+    <div class="mainbar">
+        <div class="article">
+            <h2><span>Contact</span></h2>
+            <div class="clr"></div>
+            <li>Nullapede laorem velit curabitudin enim in nibh ero leo in pede. Semperpurus nibh elit et convallis eu trices congue males monterdum elit.</li>
+        </div>
+        <div class="article">
+            <h2><span>Send us</span> mail</h2>
+            <div class="clr"></div>
+            {% trans_default_domain 'FOSUserBundle' %}
+
+            <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+                {{ form_errors(form) }}
+                <ol>
+                    <li>
+                        {{ form_label(form.username) }}
+                        {{ form_widget(form.username ,{'attr':{'class':'text'}}) }}
+                        {{ form_errors(form.username) }}
+                    </li>
+                    <li>
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email ,{'attr':{'class':'text'}}) }}
+                    {{ form_errors(form.email) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.birthday) }}
+                        {{ form_widget(form.birthday ,{'attr':{'class':'text'}}) }}
+                        {{ form_errors(form.birthday) }}
+                    </li>
+                    <li>
+                    {{ form_label(form.country) }}
+                    
+                    {{ form_widget(form.country ,{'attr':{'class':'text'}}) }}
+                    
+                    {{ form_errors(form.country) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.plainPassword.first) }}
+                        {{ form_widget(form.plainPassword.first ,{'attr':{'class':'text'}}) }}
+                        {{ form_errors(form.plainPassword.first) }}
+                    </li>
+                    <li>
+                    {{ form_label(form.plainPassword.second) }}
+                    {{ form_widget(form.plainPassword.second ,{'attr':{'class':'text'}}) }}
+                    </li>
+                    {{ form_rest(form) }}
+                    <li>
+                        <input type="submit" value="{{ 'registration.submit'|trans }}" />
+                    </li>
+                </ol>
+
+            </form>
+        </div>
+    </div> 
+
+
+{% endblock%}
+
+

@@ -1,0 +1,75 @@
+{% extends 'MyBlogBundle::layout.html.twig' %}
+
+     {% block content %}
+          <div class="mainbar">
+        {% for blog in blogs %}
+                      <div class="article">
+                        <h2>{{blog.title}}</h2>
+                        <p class="infopost">Posted <span class="date">{{blog.datecreate|date('Y-m-d')}}</span> by <a href="#">{{blog.author}}</a> &nbsp;&nbsp;|&nbsp;&nbsp; Filed under <a href="#">{{blog.tag}}</a> &nbsp;&nbsp; <a href="#" class="com"></a></p>
+                        <div class="clr"></div>
+                        <div class="img"><img src="{{asset(['images/Blog/'~blog.img]|join)}}" width="198" height="188" alt="" class="fl" /></div>
+                        <div class="post_content">
+                         {{blog.text}}
+                         
+                        </div>
+                        <div class="clr"></div>
+                      </div>
+        {% else %}
+    Немає матеріалу для відображення  
+        {% endfor %}
+             <p class="pages"></p>
+        <div class="article">
+          <h2><span>Leave a</span> Reply</h2>
+          <div class="clr"></div>
+          {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="flash-notice">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+      {{ form_start(form,{'attr':{'id':'leavereply'}}) }}
+         
+            <ol>
+              <li>
+                {{ form_label(form.name,'Ім\'я') }}
+                {{ form_errors(form.name) }}
+                {{ form_widget(form.name, {'attr': {'class': 'text','id':'name'}}) }}
+               
+              </li>
+              <li>
+                {{ form_label(form.email,'Пошта') }}
+                {{ form_errors(form.email) }}
+                {{ form_widget(form.email, {'attr': {'class': 'text','id':'email'}}) }}
+              </li>
+              <li>
+                {{ form_label(form.message,'Ваше повідомлення') }}
+                {{ form_errors(form.message) }}
+                {{ form_widget(form.message, {'attr': {'id':'message','rows':8,'cols':50}}) }}
+              </li>
+              <li> 
+               
+                   {{ form_widget(form.save, {'class':'send','id':'imageField','label':'Надіслати'}) }}
+                <div class="clr"></div>
+              </li>
+            </ol>
+          {{ form_end(form) }}
+        </div>   
+         <div class="article">
+          <h2><span>{{count}}</span> Responses</h2>
+       {% for comment in comments%}   
+        
+          <div class="clr"></div>
+          <div class="comment"> <a href="#"><img src="{{asset('images/userpic.gif')}}" width="40" height="40" alt="" class="userpic" /></a>
+            <p><a href="#">{{comment.name}}</a> Says:<br />
+              {{comment.date|date('Y-m-d')}}</p>
+            <p>{{comment.message}}</p>
+          </div>
+          {% endfor %}
+        </div>
+           
+             
+                    </div>
+             
+                
+       {% endblock %}
+   
+  

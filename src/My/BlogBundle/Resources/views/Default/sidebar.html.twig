@@ -1,0 +1,14 @@
+
+   {%block sidebar_hight %}
+                    <div class="sidebar">
+                      <div class="gadget">
+                        <h2 class="star"><span>Tags</span></h2>
+                        <div class="clr"></div>
+                        <ul class="sb_menu">
+                          {% for tag in tags%}
+                         <li><a href="{{path('my_blog_tags',{'tag':tag.tag})}}">{{tag.tag}}</a></li>
+                            {%endfor%}
+                        </ul>
+                    </div>
+                    
+   {% endblock %}

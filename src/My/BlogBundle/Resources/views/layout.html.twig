@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+{%block sidebar_hight %}
+    {{ render(controller('MyBlogBundle:Default:sidebar')) }}
+{% endblock %}
+
+
+{%block sidebar_down %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY')==false %} 
+        <div class="gadget">
+            <h2 class="star"><span>Log in</span></h2>
+            <div class="clr"></div>
+            <ul class="ex_menu">
+                <form action="{{ path("fos_user_security_check") }}" method="post" id="sendemail">
+                    <ol>
+                        <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />
+                        <li>
+                            <label for="name">Name</label> 
+                            <input id="name" name="_username" />
+                        </li>
+                        <li>
+                            <label for="password">Password</label>
+                            <input type="password" name="_password" required="required" id="email"/>
+                        </li>
+                        <li>
+                            <button type="submit">Log in</button>
+                            <a href="{{ path('fos_user_resetting_request') }}" class="link">Forget password?</a>
+                            <a href="{{ path('fos_user_registration_register') }}" class="link" >Registration</a>
+                            <div class="clr"></div>
+                        </li>
+                    </ol>
+                </form>
+            </ul>
+        </div>
+    {% else %}
+        <div class="gadget">
+            <h2 class="star"><span>Hi {{app.user.username}}</span></h2>
+            <div class="clr"></div>
+            <ul class="ex_menu">
+                <li>
+                    <a href="{{ path('fos_user_security_logout') }}">Log out</a> 
+                   
+
+                </li>
+            {% endif %}                    
+        </ul>
+    </div>
+{% endblock %}
