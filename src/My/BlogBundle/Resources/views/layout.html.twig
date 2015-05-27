@@ -10,6 +10,8 @@
             <h2 class="star"><span>Log in</span></h2>
             <div class="clr"></div>
             <ul class="ex_menu">
+               <a href="{{ url("hwi_oauth_service_redirect", {service: "facebokk"}) }}">Log In with Facebook</a></br>
+               <a href="{{ url("hwi_oauth_service_redirect", {service: "vkontakte"}) }}">Log In with Vkontakte</a>
                 <form action="{{ path("fos_user_security_check") }}" method="post" id="sendemail">
                     <ol>
                         <input type="hidden" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}" />

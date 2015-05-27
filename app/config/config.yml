@@ -5,6 +5,7 @@ imports:
 
 framework:
     #esi:             ~
+    translator: ~
     #translator:      { fallbacks: ["%locale%"] }
     translator: ~
     secret:          "%secret%"
@@ -91,3 +92,31 @@ fos_user:
     registration:
         form:
             type: my_user_registration
+hwi_oauth:
+   
+    connect:
+        account_connector: my_user_provider
+        confirmation: true
+    firewall_name: main
+        
+        #account_connector: hwi_oauth.user.provider.fosub_bridge
+        #registration_form_handler: hwi_oauth.registration.form.handler.fosub_bridge
+        #registration_form: fos_user.registration.form
+    fosub:
+        username_iterations: 30
+        properties:
+            # these properties will be used/redefined later in the custom FOSUBUserProvider service.
+            facebook: facebook_id
+            vkontakte: vkontakte_id
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           419370188243936
+            client_secret:       80a2cacf93f89dc4311d666daa94cfa1
+            scope:         "email"
+            infos_url:     "https://graph.facebook.com/me?fields=id,name,email,picture.type(square)"
+        vkontakte:
+            type:                vkontakte
+            client_id:           4901449
+            client_secret:       gqtQuQsIzNFxjHKmQxeO
+            scope:         "email"
