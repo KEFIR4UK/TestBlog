@@ -1,7 +1,8 @@
 <?php
 
 namespace My\BlogBundle\Entity;
-
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 /**
@@ -72,7 +73,7 @@ class Blog
      /**
      * @var  smallint
      *
-     * @ORM\Column(name="for_auth_user", type="smallint")
+     * @ORM\Column(name="for_auth_user", type="boolean")
      */
     private $for_auth_user;
 
@@ -319,4 +320,133 @@ class Blog
     {
         return $this->for_auth_user;
     }
+    
+    public function __toString() {
+       return $this->title;
+    }
+   
+
+/**
+ * Unmapped property to handle file uploads
+ */
+private $file;
+
+/**
+ * Sets file.
+ *
+ * @param UploadedFile $file
+ */
+
+
+/**
+ * Get file.
+ *
+ * @return UploadedFile
+ */
+public function getFile()
+{
+    return $this->file;
 }
+
+ private $temp;
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+        // check if we have an old image img
+        if (is_file($this->getAbsolutePath())) {
+            // store the old name to delete after the update
+            $this->temp = $this->getAbsolutePath();
+        } else {
+            $this->img = 'initial';
+        }
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->getFile()) {
+            $this->img = $this->getFile()->guessExtension();
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        // check if we have an old image
+        if (isset($this->temp)) {
+            // delete the old image
+            unlink($this->temp);
+            // clear the temp image img
+            $this->temp = null;
+        }
+
+        // you must throw an exception here if the file cannot be moved
+        // so that the entity is not persisted to the database
+        // which the UploadedFile move() method does
+        $this->getFile()->move(
+            $this->getUploadRootDir(),
+            $this->id.'.'.$this->getFile()->guessExtension()
+        );
+
+        $this->setFile(null);
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function storeFilenameForRemove()
+    {
+        $this->temp = $this->getAbsolutePath();
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if (isset($this->temp)) {
+            unlink($this->temp);
+        }
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->img
+            ? null
+            : $this->getUploadRootDir().'/'.$this->id.'.'.$this->img;
+    }
+    
+      protected function getUploadRootDir()
+    {
+        // the absolute directory img where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'images/Blog';
+    }
+ 
+    
+}
+    
+

@@ -2,12 +2,13 @@ parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
-    database_name: myblogtest
+    database_name: symfony
     database_user: root
-    database_password: null
+    database_password: 
     mailer_transport: gmail
     mailer_host: null
     mailer_user: YuricChmil@gmail.com
     mailer_password: qwerty256Q@
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
+    bootstrap_source:  http://twitter.github.com/bootstrap/assets/bootstrap.zip

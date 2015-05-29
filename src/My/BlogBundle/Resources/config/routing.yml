@@ -13,4 +13,7 @@ my_blog_about:
 my_blog_tags:
     path:     /tags/{tag}
     defaults: { _controller: MyBlogBundle:Default:showtags }
+my_blog_image:
+    path:     /image
+    defaults: { _controller: MyBlogBundle:Image:index }
 

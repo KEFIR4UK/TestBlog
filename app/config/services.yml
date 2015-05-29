@@ -4,6 +4,8 @@ parameters:
     my_user_provider.class: My\UserBundle\Security\Core\User\FOSUBUserProvider
 
 services:
+  
+    
     my_user.registration.form.type:
         class: My\UserBundle\Form\Type\RegistrationFormType
         tags:

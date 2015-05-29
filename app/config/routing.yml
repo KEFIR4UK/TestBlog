@@ -44,3 +44,11 @@ hwi_facebook_login:
  
 hwi_vkontakte_login:
     pattern: /login/vkontakte
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin

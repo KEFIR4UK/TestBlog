@@ -29,14 +29,14 @@ class LoadBlog extends AbstractFixture implements OrderedFixtureInterface
     	$blog1->setText("TemplateMo.com provides free css templates for your static or dynamic websites. All web templates are absolutely free to download, modify and apply for your websites without restrictions. Validate XHTML & CSS.Even though Doctrine now knows how to persist a Product object to the database, the class itself isn't really useful yet. Since Product is just a regular PHP class, you need to create getter and setter methods (e.g. getName(), setName()) in order to access its properties (since the properties are protected).");
     	$blog1->setTag("Symfony2");
     	$blog1->setDatecreate();
-        $blog1->setForAuthUser(1);
+        $blog1->setForAuthUser(true);
     	$blog1->setDateupdate();
     	$manager->persist($blog1);
     	$blog2 = new Blog();
         $this->addReference("blog-2",$blog2);
     	$blog2->setTitle("Lorem ipsum dolor sit amet");
     	$blog2->setAuthor("John");
-        $blog2->setForAuthUser(0);
+        $blog2->setForAuthUser(true);
     	$blog2->setTag("Symfony2");
     	$blog2->setDatecreate();
     	$blog2->setDateupdate();
@@ -50,7 +50,7 @@ class LoadBlog extends AbstractFixture implements OrderedFixtureInterface
     	$blog3 = new Blog();
         $this->addReference("blog-3",$blog3);
     	$blog3->setTitle("Doctrine Mapping Types");
-        $blog3->setForAuthUser(0);
+        $blog3->setForAuthUser(true);
     	$blog3->setDatecreate();
     	$blog3->setDateupdate();
     	$blog3->setAuthor("Yuriy");
@@ -63,7 +63,7 @@ As an example, the Doctrine Mapping Type string defines the mapping from a PHP s
         $manager->persist($blog3);
     	$blog4 = new Blog();
         $this->addReference("blog-4",$blog4);
-        $blog4->setForAuthUser(0);
+        $blog4->setForAuthUser(false);
     	$blog4->setTitle("Creating Classes for the Database");
     	$blog4->setTag("PHP");
     	$blog4->setDatecreate();

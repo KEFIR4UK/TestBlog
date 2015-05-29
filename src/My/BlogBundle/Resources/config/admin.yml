@@ -1,0 +1,21 @@
+services:
+    sonata.admin.post:
+        class: My\BlogBundle\Admin\BlogAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Blog" }
+        arguments:
+            - ~
+            - My\BlogBundle\Entity\Blog
+            - ~
+        calls:
+            - [ setTranslationDomain, [MyBlogBundle]]
+    sonata.admin.comment:
+        class: My\BlogBundle\Admin\CommentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Comment" }
+        arguments:
+            - ~
+            - My\BlogBundle\Entity\Comment
+            - ~
+        calls:
+            - [ setTranslationDomain, [MyBlogBundle]]
